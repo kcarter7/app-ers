@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Employee Register Page</title>
+	<link type="text/css" rel="stylesheet" href="styles.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<script type="text/javascript">
+	function validateRegisterForm() {
+		// retrieving the registered employee information.
+		var employeeid = document.forms[0].elements[0].value;
+		var firstname = document.getElementById('firstname').value;
+		var lastname = document.getElementById('lastname').value;
+		
+		var uname1 = document.getElementById('username').value;
+		var uname2 = document.registerform.username.value;
+		var pwd = document.forms[0].elements[3].value;
+		var confirmpwd = document.forms[0].elements[4].value;
+
+		var checked1 = document.getElementById('email').checked
+		var checked2 = document.getElementById('sms').checked
+		var checked3 = document.getElementById('courier').checked
+
+		var select = document.getElementById('title')
+		var title =  select.options[select.selectedIndex].value;
+
+	
+		var radio = new Array();
+		for (i = 3; i <= 5; i++) {
+			radio[i] = document.forms[0].elements[i].checked
+		}
+
+		if (uname1.length == 0) {
+			alert("Please enter username");
+			return false;
+		} else if (pwd.length == 0) {
+			alert("Please enter password");
+			return false;
+		} else if (pwd != confirmpwd) {
+			alert("Password and confirm password does not match");
+			return false;
+		}
+		else if (pwd.length < 6 || pwd.length > 12) {
+			alert("Password length must be between 6-12")
+			return false;
+		}
+		else if (radio[0] == 0 && radio[1] == 0 && radio[2] == 0) {
+			alert("Please select a gender");
+			return false;
+		} else if (!checked1 && !checked2 && !checked3) {
+			alert("Please Pick a Notification");
+			return false;
+		} else if (title == 0) {
+			alert("Please select a employment status");
+			return false;
+		}
+
+	}
+
+	function addInput() {
+		var mainDiv = document.getElementById('myDiv1');
+		var marriedButton = document.getElementById('marriedButton');
+
+		var newTextBox = document.createElement('input');
+		newTextBox.type = 'text';
+		newTextBox.setAttribute('id', 'spousename');
+
+		marriedButton.innerText = "Spouse Name : "
+		mainDiv.append(newTextBox);
+
+	}
+</script>
+
+<body>
+	<form class="form-style" action="RegisterController" method="get" onsubmit="return validateRegisterForm()"
+		name="registerform">
+		<table cellspacing="20" cellpadding="20">
+			<tr>
+				<td><label> * Employee ID: </label></td>
+				<td><input type="text" name="employeeid" id="employeeid"></td>
+			</tr>
+			<tr>
+				<td><label> * First Name: </label></td>
+				<td><input type="text" name="firstname" id="firstname"></td>
+			</tr>
+			<tr>
+				<td><label> * Last Name: </label></td>
+				<td><input type="text" name="lastname" id="lastname"></td>
+			</tr>
+			<tr>
+				<td><label> * Username: </label></td>
+				<td><input type="text" name="username" id="username"></td>
+			</tr>
+			<tr>
+				<td><label> * Password: </label></td>
+				<td><input type="password" name="password" id="password">
+			</tr>
+			<tr>
+				<td><label> * Confirm Password: </label></td>
+				<td><input type="password" name="confirmpassword" id="confirmpassword"></td>
+			</tr>
+			<tr>
+				<td><label> * Gender: </label></td>
+				<td><input type="radio" name="gender" value="male" id="radio1">Male
+					<input type="radio" name="gender" value="female" id="radio2">Female
+					<input type="radio" name="gender" value="others" id="radio3">Others
+				</td>
+			</tr>
+
+			<tr>
+				<td><label> * Notifications: </label></td>
+				<td><input type="checkbox" name="notification" value="email" id="email">Email <input type="checkbox"
+						name="notification" value="sms" id="sms">SMS <input type="checkbox" name="notification"
+						value="courier" id="courier">Courier</td>
+			</tr>
+
+			<tr>
+				<td><label> * Employee Status: </label></td>
+				<td><select name="title" id="title">
+						<option>-- select --</option>
+						<option>Associate</option>
+						<option>Manager</option>
+						<option>Entry Level</option>
+					</select></td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="Register"></td>
+				<td><input type="reset" value="Clear"></td>
+			</tr>
+
+		</table>
+	</form>
+</body>
+
+</html>
