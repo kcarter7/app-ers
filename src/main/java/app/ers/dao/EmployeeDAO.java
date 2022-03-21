@@ -14,5 +14,6 @@ public interface EmployeeDAO {
 	public boolean reimbursementRequest(Reimbursement reimbursement);
 	public List<Reimbursement> viewPendingReimbursement(int employeeId, String status);
 	public List<Reimbursement> viewResolveReimbursement(int employeeId, String status);
+	public List<Employee> viewEmployeeInfo(int employeeId);
 	
 }
