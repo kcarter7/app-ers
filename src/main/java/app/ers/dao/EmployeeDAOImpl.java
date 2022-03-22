@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.ers.model.Employee;
+import app.ers.model.Reimbursement;
 import app.ers.utility.DBConnection;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -127,6 +128,30 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 		
 		return employees;
+	}
+
+	@Override
+	public boolean reimbursementRequest(Reimbursement reimbursement) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Reimbursement> viewPendingReimbursement(int employeeId, String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reimbursement> viewResolveReimbursement(int employeeId, String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> viewEmployeeInfo(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

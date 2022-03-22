@@ -12,7 +12,9 @@
 <title>LogIn</title>
 <link rel="stylesheet" href="login.css">
 </head>
+<script>
 
+</script>
 <body>
 	<div class="main-heading">
 		<h1 class="center">Employee Reimbursement System</h1>
