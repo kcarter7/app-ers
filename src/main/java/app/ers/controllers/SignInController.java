@@ -58,8 +58,7 @@ public class SignInController extends HttpServlet {
 			session.setAttribute("message", "Valid User");
 
 			out.println("<h1>Welcome :"+uname);
-			//out.println("<h1><a href=welcome.html>Proceed to your home page </a>");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("welcome.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
 			dispatcher.include(request, response);
 		}
 		else {

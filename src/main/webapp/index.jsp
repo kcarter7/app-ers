@@ -1,3 +1,5 @@
+<%@page import="app.ers.dao.EmployeeDAOImpl"%>
+<%@page import="app.ers.dao.EmployeeDAO"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link
@@ -12,12 +14,9 @@
 <title>LogIn</title>
 <link rel="stylesheet" href="login.css">
 </head>
-<script>
-
-</script>
 <body>
 	<div class="main-heading">
-		<h1 class="center">Employee Reimbursement System</h1>
+		<h1>Employee Reimbursement System</h1>
 		<br />
 	</div>
 	<section class="vh-100 gradient-custom">
@@ -31,11 +30,9 @@
 							<div class="mb-md-5 mt-md-4 pb-5">
 
 								<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-								<p class="text-white-50 mb-5">Please enter your login and
-									password!</p>
 
-								<div class="form-outline form-white mb-4">
-									<input type="username" id="username"
+								<div class="form-outline form-white mb-4" id="">
+									<input type="text" id="username"
 										class="form-control form-control-lg" /> <label
 										class="form-label" for="username">Username</label>
 								</div>
@@ -49,11 +46,9 @@
 								<button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
 								<div class="d-flex justify-content-center text-center mt-4 pt-1">
-									<a href="#!" class="text-white"><i
-										class="fab fa-facebook-f fa-lg"></i></a> <a href="#!"
-										class="text-white"><i
-										class="fab fa-twitter fa-lg mx-4 px-2"></i></a> <a href="#!"
-										class="text-white"><i class="fab fa-google fa-lg"></i></a>
+									<a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+									<a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+									<a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
 								</div>
 
 							</div>

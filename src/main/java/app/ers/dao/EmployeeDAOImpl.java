@@ -1,11 +1,16 @@
 package app.ers.dao;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import app.ers.model.Employee;
 import app.ers.model.Reimbursement;
@@ -13,6 +18,8 @@ import app.ers.utility.DBConnection;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 
+	private static Logger logger = LogManager.getLogger(EmployeeDAOImpl.class);
+	
 	Connection connection = DBConnection.getConnection();
 	
 	@Override
@@ -131,27 +138,111 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean reimbursementRequest(Reimbursement reimbursement) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean reimbursementRequest(int employeeId, Reimbursement reimbursement) {
+		System.out.println("###Sending reimbursement request for employee :" );
+		boolean sent = false;
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement("insert into reimbursements values(?, ?, ?, ?");
+			statement.setInt(1, employeeId);
+			statement.setDouble(2, reimbursement.getAmount());
+			statement.setString(3, reimbursement.getStatus());
+			statement.setString(4, reimbursement.getPurpose());
+			sent = statement.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sent;
 	}
 
 	@Override
-	public List<Reimbursement> viewPendingReimbursement(int employeeId, String status) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reimbursement> viewPendingReimbursement(int employeeId, Reimbursement reimbursement) {
+		System.out.println("###Viewing pending reimbursements");
+		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
+		PreparedStatement statement = null;
+		ResultSet res = null;
+		
+		try {
+			statement = connection.prepareStatement("select * from reimbursements where employeeId = ? and status = ?");
+			statement.setInt(1, employeeId);
+			statement.setString(2, "Pending");
+			
+			res = statement.executeQuery();
+			
+			reimbursement.setEmployeeId(employeeId);
+			reimbursement.setAmount(res.getDouble(2));
+			reimbursement.setStatus(res.getString(3));
+			reimbursement.setPurpose(res.getString(4));
+			reimbursements.add(reimbursement);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return reimbursements;
 	}
 
 	@Override
-	public List<Reimbursement> viewResolveReimbursement(int employeeId, String status) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reimbursement> viewResolveReimbursement(int employeeId, Reimbursement reimbursement) {
+		System.out.println("###Viewing resolved reimbursements for :" + employeeId);
+		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
+		PreparedStatement statement = null;
+		ResultSet res = null;
+		
+		try {
+			statement = connection.prepareStatement("select * from reimbursements where employeeId = ? and status = ?");
+			statement.setInt(1, employeeId);
+			statement.setString(2, "Resolved");
+			
+			res = statement.executeQuery();
+			
+			reimbursement.setEmployeeId(employeeId);
+			reimbursement.setAmount(res.getDouble(2));
+			reimbursement.setStatus(res.getString(3));
+			reimbursement.setPurpose(res.getString(4));
+			
+			reimbursements.add(reimbursement);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reimbursements;
 	}
 
 	@Override
 	public List<Employee> viewEmployeeInfo(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("###Viewing your employee info now");
+		List<Employee> employees = new ArrayList<Employee>();
+		PreparedStatement statement = null;
+		ResultSet res = null;
+		
+		try {
+			statement = connection.prepareStatement("select * from employees where employeeId = ?");
+			statement.setInt(1, employeeId);
+			res = statement.executeQuery();
+			Employee emp = new Employee();
+			
+			while (res.next()) {
+				emp.setEmployeeId(res.getString(1));
+				emp.setFirstName(res.getString(2));
+				emp.setLastName(res.getString(3));
+				emp.setUsername(res.getString(4));
+				emp.setPassword(res.getString(5));
+				emp.setGender(res.getString(6));
+				emp.setNotifications(res.getString(7));
+				emp.setTitle(res.getString(8));
+				employees.add(emp);
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return employees;
 	}
 
 }
