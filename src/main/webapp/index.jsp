@@ -30,19 +30,17 @@
 							<div class="mb-md-5 mt-md-4 pb-5">
 
 								<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-
-								<div class="form-outline form-white mb-4" id="">
-									<input type="text" id="username"
-										class="form-control form-control-lg" /> <label
-										class="form-label" for="username">Username</label>
+								<form name="loginform" action="SignInController" method="post">
+								<div class="form-outline form-white mb-4">
+									<input type="text" id="username" class="form-control form-control-lg" /> 
+									<label class="form-label" for="username">Username</label>
 								</div>
 
 								<div class="form-outline form-white mb-4">
-									<input type="password" id="password"
-										class="form-control form-control-lg" /> <label
-										class="form-label" for="typePasswordX">Password</label>
+									<input type="password" id="password"class="form-control form-control-lg" /> 
+									<label class="form-label" for="typePasswordX">Password</label>
 								</div>
-
+								</form>
 								<button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
 								<div class="d-flex justify-content-center text-center mt-4 pt-1">
